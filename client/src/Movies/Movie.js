@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Route, Link } from 'react-router-dom';
 
 const Movie = (props) => {
   const [movie, setMovie] = useState();
@@ -35,8 +36,9 @@ const Movie = (props) => {
     <div className="save-wrapper">
       <div className="movie-card">
         <h2>{title}</h2>
-        <div className="movie-director">
-          Director: <em>{director}</em>
+        <div>
+          <Link to={`/movies/${props.match.params.id}/director`}>Director</Link>
+          <Route exact path="/movies/:id/director" render={props =><div className="movie-director"> Director: <em>{director}</em></div>}/>
         </div>
         <div className="movie-metascore">
           Metascore: <strong>{metascore}</strong>
@@ -58,6 +60,7 @@ const Movie = (props) => {
         ))}
       </div>
       <div className="save-button">Save</div>
+      
     </div>
   );
 }
